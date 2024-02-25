@@ -22,22 +22,17 @@ export const SideBar: React.FC<ISideBarProps> = ({ children }) => {
         setExpanded((curr) => !curr);
     };
     return (
-        <aside className={`h-screen w-64`}>
+        <aside className={`h-screen`}>
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="flex justify-between items-center px-8 py-6">
                     <img
                         src={logo}
                         className={`overflow-hidden transition-all ${
-                            expanded ? "w-10" : "w-0 h-0"
+                            expanded ? "" : "w-0 h-0"
                         }`}
                         alt="logo"
                     />
 
-                    <div
-                        className={`w-[1px] h-10 bg-gray-300 overflow-hidden transition-all ${
-                            expanded ? "w-10" : "w-0 h-0"
-                        }`}
-                    ></div>
                     {expanded ? (
                         <IoMdArrowRoundBack
                             size={20}
