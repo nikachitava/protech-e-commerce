@@ -15,7 +15,7 @@ export const SideBarItem: React.FC<ISideBarItemProps> = ({
     const { expanded } = useContext(SideBarContext);
     return (
         <li
-            className={`relative flex items-center mb-4 px-8 py-3 transition-colors group cursor-pointer ${
+            className={`relative flex items-center px-7 py-4 transition-colors group cursor-pointer ${
                 active
                     ? "bg-[#EFF2F5] text-[#FFC831]"
                     : "hover:bg-[#EFF2F5] text-gray-500"

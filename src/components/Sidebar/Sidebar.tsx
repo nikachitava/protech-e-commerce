@@ -23,7 +23,7 @@ export const SideBar: React.FC<ISideBarProps> = ({ children }) => {
     };
     return (
         <aside className={`h-screen`}>
-            <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+            <nav className="h-full flex flex-col bg-[#F9FAFB] border-r shadow-sm">
                 <div className="flex justify-between items-center px-8 py-6">
                     <img
                         src={logo}
