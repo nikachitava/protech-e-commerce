@@ -8,6 +8,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Header } from "./components/Header/Header";
 import { Category } from "./components/Category/Category";
+import { Products } from "./components/Products/Products";
 
 export default function App() {
     return (
@@ -42,6 +43,7 @@ export default function App() {
                     </div>
                     <div className="mt-6">
                         <Category />
+                        <Products />
                     </div>
                 </div>
             </div>
