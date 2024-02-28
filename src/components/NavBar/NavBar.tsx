@@ -4,6 +4,7 @@ import bell from "/images/icons/bell.svg";
 import bag from "/images/icons/bag.svg";
 import { Button } from "../Button/Button";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
+import useravatar from "/images/icons/useravatar.svg";
 
 export const NavBar = () => {
     return (
@@ -16,7 +17,7 @@ export const NavBar = () => {
                 <img src={bell} alt={bell} />
                 <img src={bag} alt={bag} />
                 <Button text="Become a seller" />
-                <UserAvatar />
+                <UserAvatar avatar={useravatar} />
             </div>
         </div>
     );
