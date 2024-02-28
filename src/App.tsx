@@ -7,6 +7,7 @@ import { MdFeed } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Header } from "./components/Header/Header";
+import { Category } from "./components/Category/Category";
 
 export default function App() {
     return (
@@ -38,6 +39,9 @@ export default function App() {
                     <NavBar />
                     <div className="mt-6">
                         <Header subheader={"Home"} header={"Best Products"} />
+                    </div>
+                    <div className="mt-6">
+                        <Category />
                     </div>
                 </div>
             </div>
