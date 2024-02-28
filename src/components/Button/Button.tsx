@@ -4,7 +4,7 @@ interface IButtonProps {
 
 export const Button: React.FC<IButtonProps> = ({ text }) => {
     return (
-        <div className="bg-[#FFC831] px-6 py-2 rounded-full  text-center cursor-pointer">
+        <div className="bg-[#FFC831] px-6 py-2 rounded-full  text-center cursor-pointer font-poppins">
             {text}
         </div>
     );

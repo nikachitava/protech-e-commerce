@@ -23,7 +23,7 @@ export const SideBarItem: React.FC<ISideBarItemProps> = ({
         >
             {icon}
             <span
-                className={`overflow-hidden transition-all ml-4 ${active ? "text-[#212B36]" : "text-[#637381]"}
+                className={`font-poppins overflow-hidden transition-all ml-4 ${active ? "text-[#212B36]" : "text-[#637381]"}
                 ${expanded ? "w-52 ml-3" : "w-0 h-0"}`}
             >
                 {text}

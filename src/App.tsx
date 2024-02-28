@@ -6,6 +6,7 @@ import { FaRegCompass } from "react-icons/fa";
 import { MdFeed } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import { NavBar } from "./components/NavBar/NavBar";
+import { Header } from "./components/Header/Header";
 
 export default function App() {
     return (
@@ -35,6 +36,9 @@ export default function App() {
                 </div>
                 <div className="flex-1 pt-6 mr-7">
                     <NavBar />
+                    <div className="mt-6">
+                        <Header subheader={"Home"} header={"Best Products"} />
+                    </div>
                 </div>
             </div>
         </>
