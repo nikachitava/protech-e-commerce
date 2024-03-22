@@ -13,6 +13,8 @@ import { Popular } from "./pages/Popular.tsx";
 import { Feed } from "./pages/Feed.tsx";
 import { Contact } from "./pages/Contact.tsx";
 import { Root } from "./pages/Root.tsx";
+import { LoginForm } from "./components/LoginForm/LoginForm.tsx";
+import { SingupForm } from "./components/SingupForm/SingupForm.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,6 +24,8 @@ const router = createBrowserRouter(
             <Route path="popular" element={<Popular />} />
             <Route path="feed" element={<Feed />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route path="singup" element={<SingupForm />} />
         </Route>
     )
 );
