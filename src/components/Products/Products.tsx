@@ -4,7 +4,7 @@ import joystick from "/images/product/joystick.svg";
 
 export const Products = () => {
     return (
-        <div className="grid grid-cols-3 gap-7 mt-7 mb-10 justify-center">
+        <div className="flex justify-between flex-wrap gap-7 mt-7 mb-10">
             <ProductCard
                 image={joystick}
                 title={"JoyStick EA SPORT"}
