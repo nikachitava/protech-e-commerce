@@ -5,7 +5,6 @@ import { FiPhoneCall } from "react-icons/fi";
 import { MdOutlineWhatshot, MdFeed } from "react-icons/md";
 import { SideBarItem } from "../components/SideBarItem/SideBarItem";
 import { NavBar } from "../components/NavBar/NavBar";
-import { Header } from "../components/Header/Header";
 import { Link } from "react-router-dom";
 
 export const Root = () => {
@@ -53,9 +52,6 @@ export const Root = () => {
             </SideBar>
             <div className="grid-row-1/2 overflow-y-auto p-6 ">
                 <NavBar />
-                <div className="mt-6">
-                    <Header subheader={"Home"} header={"Best Products"} />
-                </div>
 
                 <Outlet />
             </div>
