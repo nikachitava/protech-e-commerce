@@ -1,83 +1,171 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+    username: string;
+    surname: string;
+    email: string;
+    password: string;
+    confPassword: string;
+    acceptTerms: boolean;
+}
 
 export const SingupForm = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>();
+
+    const onSubmit = (data: FormData) => {
+        console.log("Click submit data: ", data);
+    };
+
+    const labelSuccesStyle =
+        "block mb-2 text-sm font-medium text-gray-900 dark:text-white";
+    const labelErrorStyle =
+        "block mb-2 text-sm font-medium text-red-700 dark:text-red-500";
+
+    const inputSuccesStyle =
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+
+    const inputErrorStyle =
+        "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500";
+
+    const messageSuccesStyle =
+        "mt-2 text-sm text-green-600 dark:text-green-500";
+    const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
+
     return (
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label
+                        className={
+                            errors.username ? labelErrorStyle : labelSuccesStyle
+                        }
+                    >
                         First name
                     </label>
                     <input
                         type="text"
                         id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="John"
-                        required
+                        className={
+                            errors.username ? inputErrorStyle : inputSuccesStyle
+                        }
+                        placeholder="Name"
+                        {...register("username", {
+                            pattern: {
+                                value: /^[A-Za-z]+$/,
+                                message: "Use latin letters",
+                            },
+                            required: {
+                                value: true,
+                                message: "This field is required",
+                            },
+                        })}
                     />
+                    {errors.username && (
+                        <p
+                            className={
+                                errors.username
+                                    ? messageErrorStyle
+                                    : messageSuccesStyle
+                            }
+                        >
+                            <span className="font-medium">Oops...!</span>{" "}
+                            {errors.username.message}
+                        </p>
+                    )}
                 </div>
                 <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label
+                        className={
+                            errors.surname ? labelErrorStyle : labelSuccesStyle
+                        }
+                    >
                         Last name
                     </label>
                     <input
                         type="text"
                         id="last_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className={
+                            errors.surname ? inputErrorStyle : inputSuccesStyle
+                        }
                         placeholder="Doe"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Phone number
-                    </label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="123-45-678"
-                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                        required
+                        {...register("surname", {
+                            required: true,
+                            maxLength: 20,
+                        })}
                     />
                 </div>
             </div>
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label
+                    className={
+                        errors.email ? labelErrorStyle : labelSuccesStyle
+                    }
+                >
                     Email address
                 </label>
                 <input
                     type="email"
                     id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={
+                        errors.email ? inputErrorStyle : inputSuccesStyle
+                    }
                     placeholder="john.doe@company.com"
-                    required
+                    {...register("email", {
+                        required: true,
+                        maxLength: 30,
+                    })}
                 />
             </div>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div className="mb-6">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label
+                        className={
+                            errors.password ? labelErrorStyle : labelSuccesStyle
+                        }
+                    >
                         Password
                     </label>
                     <input
                         type="password"
                         id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className={
+                            errors.password ? inputErrorStyle : inputSuccesStyle
+                        }
                         placeholder="•••••••••"
-                        required
+                        {...register("password", {
+                            required: true,
+                            maxLength: 20,
+                        })}
                     />
                 </div>
                 <div className="mb-6">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label
+                        className={
+                            errors.confPassword
+                                ? labelErrorStyle
+                                : labelSuccesStyle
+                        }
+                    >
                         Confirm password
                     </label>
                     <input
                         type="password"
                         id="confirm_password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className={
+                            errors.confPassword
+                                ? inputErrorStyle
+                                : inputSuccesStyle
+                        }
                         placeholder="•••••••••"
-                        required
+                        {...register("confPassword", {
+                            required: true,
+                            maxLength: 20,
+                        })}
                     />
                 </div>
             </div>
@@ -93,7 +181,7 @@ export const SingupForm = () => {
                         type="checkbox"
                         value=""
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                        required
+                        {...register("acceptTerms", {})}
                     />
                 </div>
 
