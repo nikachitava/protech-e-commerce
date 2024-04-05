@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState } from "react";
 
 interface FormData {
     username: string;
@@ -12,6 +13,8 @@ interface FormData {
 }
 
 export const SingupForm = () => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
     const {
         register,
         handleSubmit,
@@ -24,9 +27,17 @@ export const SingupForm = () => {
             .post("http://localhost:3000/register", data)
             .then((response) => {
                 console.log(response.data);
+                window.location.reload();
             })
             .catch((error) => {
                 console.error(error);
+                if (error.response && error.response.data) {
+                    setErrorMessage(error.response.data.message);
+                } else {
+                    setErrorMessage(
+                        "An error occurred while processing your request."
+                    );
+                }
             });
     };
 
@@ -82,8 +93,9 @@ export const SingupForm = () => {
                                     : messageSuccesStyle
                             }
                         >
-                            <span className="font-medium">Oops...!</span>{" "}
-                            {errors.username.message}
+                            <span className="font-medium">
+                                {errors.username.message}
+                            </span>
                         </p>
                     )}
                 </div>
@@ -103,10 +115,26 @@ export const SingupForm = () => {
                         }
                         placeholder="Doe"
                         {...register("surname", {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: "This field is required",
+                            },
                             maxLength: 20,
                         })}
                     />
+                    {errors.surname && (
+                        <p
+                            className={
+                                errors.surname
+                                    ? messageErrorStyle
+                                    : messageSuccesStyle
+                            }
+                        >
+                            <span className="font-medium">
+                                {errors.surname.message}
+                            </span>
+                        </p>
+                    )}
                 </div>
             </div>
             <div className="mb-6">
@@ -125,10 +153,26 @@ export const SingupForm = () => {
                     }
                     placeholder="john.doe@company.com"
                     {...register("email", {
-                        required: true,
+                        required: {
+                            value: true,
+                            message: "Email field is required",
+                        },
                         maxLength: 30,
                     })}
                 />
+                {errors.email && (
+                    <p
+                        className={
+                            errors.email
+                                ? messageErrorStyle
+                                : messageSuccesStyle
+                        }
+                    >
+                        <span className="font-medium">
+                            {errors.email.message}
+                        </span>
+                    </p>
+                )}
             </div>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div className="mb-6">
@@ -147,10 +191,26 @@ export const SingupForm = () => {
                         }
                         placeholder="•••••••••"
                         {...register("password", {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: "Password field is required",
+                            },
                             maxLength: 20,
                         })}
                     />
+                    {errors.password && (
+                        <p
+                            className={
+                                errors.password
+                                    ? messageErrorStyle
+                                    : messageSuccesStyle
+                            }
+                        >
+                            <span className="font-medium">
+                                {errors.password.message}
+                            </span>
+                        </p>
+                    )}
                 </div>
                 <div className="mb-6">
                     <label
@@ -172,10 +232,26 @@ export const SingupForm = () => {
                         }
                         placeholder="•••••••••"
                         {...register("confPassword", {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: "Password confirmation is required",
+                            },
                             maxLength: 20,
                         })}
                     />
+                    {errors.confPassword && (
+                        <p
+                            className={
+                                errors.confPassword
+                                    ? messageErrorStyle
+                                    : messageSuccesStyle
+                            }
+                        >
+                            <span className="font-medium">
+                                {errors.confPassword.message}
+                            </span>
+                        </p>
+                    )}
                 </div>
             </div>
             <Link to={"/login"}>
@@ -211,6 +287,11 @@ export const SingupForm = () => {
             >
                 Submit
             </button>
+            {errorMessage && (
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                    {errorMessage}
+                </p>
+            )}
         </form>
     );
 };
