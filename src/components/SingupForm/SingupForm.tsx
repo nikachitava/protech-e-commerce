@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 interface FormData {
     username: string;
@@ -19,6 +20,14 @@ export const SingupForm = () => {
 
     const onSubmit = (data: FormData) => {
         console.log("Click submit data: ", data);
+        axios
+            .post("http://localhost:3000/register", data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     const labelSuccesStyle =
