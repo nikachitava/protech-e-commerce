@@ -12,6 +12,20 @@ interface FormData {
     acceptTerms: boolean;
 }
 
+const labelSuccesStyle =
+    "block mb-2 text-sm font-medium text-gray-900 dark:text-white";
+const labelErrorStyle =
+    "block mb-2 text-sm font-medium text-red-700 dark:text-red-500";
+
+const inputSuccesStyle =
+    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+
+const inputErrorStyle =
+    "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500";
+
+const messageSuccesStyle = "mt-2 text-sm text-green-600 dark:text-green-500";
+const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
+
 export const SingupForm = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -40,21 +54,6 @@ export const SingupForm = () => {
                 }
             });
     };
-
-    const labelSuccesStyle =
-        "block mb-2 text-sm font-medium text-gray-900 dark:text-white";
-    const labelErrorStyle =
-        "block mb-2 text-sm font-medium text-red-700 dark:text-red-500";
-
-    const inputSuccesStyle =
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
-
-    const inputErrorStyle =
-        "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500";
-
-    const messageSuccesStyle =
-        "mt-2 text-sm text-green-600 dark:text-green-500";
-    const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
 
     return (
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +156,10 @@ export const SingupForm = () => {
                             value: true,
                             message: "Email field is required",
                         },
-                        maxLength: 30,
+                        pattern: {
+                            value: /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/,
+                            message: "Enter correct email address",
+                        },
                     })}
                 />
                 {errors.email && (
@@ -195,7 +197,6 @@ export const SingupForm = () => {
                                 value: true,
                                 message: "Password field is required",
                             },
-                            maxLength: 20,
                         })}
                     />
                     {errors.password && (
@@ -236,7 +237,6 @@ export const SingupForm = () => {
                                 value: true,
                                 message: "Password confirmation is required",
                             },
-                            maxLength: 20,
                         })}
                     />
                     {errors.confPassword && (
