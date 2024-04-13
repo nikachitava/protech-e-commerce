@@ -1,14 +1,5 @@
+import { IProductCardProps } from "../../interfaces/IProductCardProps";
 import addcart from "/images/icons/addcart.svg";
-
-interface IProductCardProps {
-    image: string;
-    title: string;
-    author: string;
-    price: number;
-    discount?: number;
-    sales: number;
-    rate: number;
-}
 
 export const ProductCard: React.FC<IProductCardProps> = ({
     image,
@@ -20,7 +11,7 @@ export const ProductCard: React.FC<IProductCardProps> = ({
     rate,
 }) => {
     return (
-        <div className="bg-[#f2f2f2] w-[356px]">
+        <div className="bg-[#f2f2f2] w-[316px]">
             <img src={image} alt={image} />
             <div className="px-3 py-3">
                 <div>

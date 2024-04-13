@@ -36,7 +36,7 @@ export default function App() {
                         />
                     </SideBar>
                 </div>
-                <div className="flex-1 pt-6 mr-7">
+                <div className="flex-1 pt-6 mr-7 bg-red-600">
                     <NavBar />
                     <div className="mt-6">
                         <Header subheader={"Home"} header={"Best Products"} />

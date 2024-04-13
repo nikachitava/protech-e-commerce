@@ -11,7 +11,7 @@ export const Root = () => {
     const location = useLocation();
 
     return (
-        <div className="grid grid-cols-[auto,1fr] grid-rows-[100vh] ">
+        <div className="grid grid-cols-[auto,1fr] grid-rows-[100vh]">
             <SideBar>
                 <Link to={"/"}>
                     <SideBarItem
@@ -50,7 +50,7 @@ export const Root = () => {
                     />
                 </Link>
             </SideBar>
-            <div className="grid-row-1/2 overflow-y-auto p-6 ">
+            <div className="grid-row-1/2 overflow-y-auto p-6">
                 <NavBar />
 
                 <Outlet />

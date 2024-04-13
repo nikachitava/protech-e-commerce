@@ -11,19 +11,19 @@ export const Category = () => {
     const [categories, setCategories] = useState<Category[]>([]);
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get(
-                    "http://localhost:3000/categories"
-                );
-                setCategories(response.data);
-                console.log(response.data);
-            } catch (error) {
-                console.log("errror");
-            }
-        };
         fetchCategories();
     }, []);
+
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/categories"
+            );
+            setCategories(response.data);
+        } catch (error) {
+            console.log("errror");
+        }
+    };
 
     return (
         <div className="">
