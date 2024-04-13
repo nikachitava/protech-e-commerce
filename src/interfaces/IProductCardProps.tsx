@@ -4,7 +4,7 @@ export interface IProductCardProps {
     title: string;
     author: string;
     price: number;
-    discount?: number;
+    discount?: number | null;
     sales: number;
     rate: number;
 }
