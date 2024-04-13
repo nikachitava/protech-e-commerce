@@ -27,7 +27,7 @@ export const Category = () => {
 
     return (
         <div className="">
-            <ul className="overflow-x-auto flex items-center gap-7 cursor-grab">
+            <ul className="overflow-x-auto flex items-center flex-wrap gap-4 cursor-grab">
                 {categories.map((category) => (
                     <li key={category.categoryID}>
                         <CategoryItem categoryName={category.categoryName} />
