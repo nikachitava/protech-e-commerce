@@ -32,8 +32,11 @@ export const SingupForm = () => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm<FormData>();
+
+    const watchPassword = watch("password");
 
     const onSubmit = (data: FormData) => {
         console.log("Click submit data: ", data);
@@ -237,6 +240,11 @@ export const SingupForm = () => {
                                 value: true,
                                 message: "Password confirmation is required",
                             },
+                            validate: {
+                                passwordMatch: (value) =>
+                                    value === watchPassword ||
+                                    "Password doesnt Match",
+                            },
                         })}
                     />
                     {errors.confPassword && (
@@ -254,23 +262,27 @@ export const SingupForm = () => {
                     )}
                 </div>
             </div>
-            <Link to={"/login"}>
-                <p className="font-poppins text-xs text-gray-900 my-3">
-                    I already have an account
-                </p>
-            </Link>
+            <div>
+                <Link to={"/login"}>
+                    <p className="font-poppins text-xs text-gray-900 my-3">
+                        I already have an account
+                    </p>
+                </Link>
+            </div>
             <div className="flex items-start mb-6">
                 <div className="flex items-center h-5">
                     <input
                         id="remember"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                        {...register("acceptTerms", {})}
+                        className={`w-4 h-4 border ${errors.acceptTerms ? "border-red-900 bg-red-50" : "border-gray-300 bg-gray-50"}  rounded focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800`}
+                        {...register("acceptTerms", { required: true })}
                     />
                 </div>
 
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label
+                    className={`ms-2 text-sm font-medium ${errors.acceptTerms ? "text-red-600 underline" : "text-gray-900"}  dark:text-gray-300`}
+                >
                     I agree with the{" "}
                     <a
                         href="#"
