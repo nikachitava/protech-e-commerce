@@ -2,8 +2,9 @@ import { IProductCardProps } from "../../interfaces/IProductCardProps";
 import addcart from "/images/icons/addcart.svg";
 
 export const ProductCard: React.FC<IProductCardProps> = ({
+    productName,
     image,
-    title,
+    prodDescription,
     author,
     price,
     discount,
@@ -11,12 +12,13 @@ export const ProductCard: React.FC<IProductCardProps> = ({
     rate,
 }) => {
     return (
-        <div className="bg-[#f2f2f2] w-[316px]">
-            <img src={image} alt={image} />
+        <div className="bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            <img src={image} alt={image} className="w-[316px] h-[200px]" />
             <div className="px-3 py-3">
                 <div>
+                    <p>{productName}</p>
                     <h1 className="text-[#212B36] font-semibold leading-5 text-sm font-poppins">
-                        {title}
+                        {prodDescription.substring(0, 50)}
                     </h1>
                     <p className="text-[#637381] font-medium leading-5 text-sm font-poppins">
                         {author}
