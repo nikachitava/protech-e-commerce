@@ -1,12 +1,16 @@
 import { useState, createContext, useEffect, ReactNode } from "react";
 import { IUser } from "../interfaces/IUser";
+import axios from "axios";
+import { ILoginData } from "../interfaces/ILoginData";
 
 interface AuthContextType {
     currentUser: IUser | null;
+    login: (inputs: ILoginData) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
     currentUser: null,
+    login: async () => {},
 });
 
 interface AuthContextProviderProps {
@@ -18,8 +22,19 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         JSON.parse(localStorage.getItem("user") || "null")
     );
 
-    const login = () => {
-        //TO DO
+    const login = async (inputs: ILoginData) => {
+        try {
+            const res = await axios.post(
+                "http://localhost:3000/register",
+                inputs,
+                {
+                    withCredentials: true,
+                }
+            );
+            setCurrentUser(res.data);
+        } catch (error) {
+            console.log("login error", error);
+        }
     };
 
     useEffect(() => {
@@ -27,7 +42,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser }}>
+        <AuthContext.Provider value={{ currentUser, login }}>
             {children}
         </AuthContext.Provider>
     );

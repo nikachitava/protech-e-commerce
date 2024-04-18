@@ -2,15 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
-
-interface FormData {
-    username: string;
-    surname: string;
-    email: string;
-    password: string;
-    confPassword: string;
-    acceptTerms: boolean;
-}
+import { IFormData } from "../../interfaces/IFormData";
 
 const labelSuccesStyle =
     "block mb-2 text-sm font-medium text-gray-900 dark:text-white";
@@ -34,12 +26,11 @@ export const SingupForm = () => {
         handleSubmit,
         watch,
         formState: { errors },
-    } = useForm<FormData>();
+    } = useForm<IFormData>();
 
     const watchPassword = watch("password");
 
-    const onSubmit = (data: FormData) => {
-        console.log("Click submit data: ", data);
+    const onSubmit = (data: IFormData) => {
         axios
             .post("http://localhost:3000/register", data)
             .then((response) => {

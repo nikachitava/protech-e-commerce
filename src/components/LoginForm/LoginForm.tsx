@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
-interface ILoginData {
-    email: string;
-    password: string;
-}
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+import { ILoginData } from "../../interfaces/ILoginData";
 
 const labelSuccesStyle =
     "block mb-2 text-sm font-medium text-gray-900 dark:text-white";
@@ -27,8 +25,14 @@ export const LoginForm = () => {
         formState: { errors },
     } = useForm<ILoginData>();
 
-    const onSubmit = () => {
-        console.log("onsubmit");
+    const { login } = useContext(AuthContext);
+
+    const onSubmit = async (data: ILoginData) => {
+        try {
+            await login(data);
+        } catch (error) {
+            console.log("login error", error);
+        }
     };
 
     return (
