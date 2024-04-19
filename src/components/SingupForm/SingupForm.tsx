@@ -32,7 +32,7 @@ export const SingupForm = () => {
 
     const onSubmit = (data: IFormData) => {
         axios
-            .post("http://localhost:3000/register", data)
+            .post("http://localhost:3000/auth/register", data)
             .then((response) => {
                 console.log(response.data);
                 window.location.reload();

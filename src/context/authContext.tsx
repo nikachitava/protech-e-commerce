@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const login = async (inputs: ILoginData) => {
         try {
             const res = await axios.post(
-                "http://localhost:3000/register",
+                "http://localhost:3000/auth/login",
                 inputs,
                 {
                     withCredentials: true,

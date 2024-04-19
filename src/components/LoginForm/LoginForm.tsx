@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { ILoginData } from "../../interfaces/ILoginData";
 
@@ -19,6 +19,9 @@ const messageSuccesStyle = "mt-2 text-sm text-green-600 dark:text-green-500";
 const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
 
 export const LoginForm = () => {
+    const [err, setErr] = useState<any>();
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -30,13 +33,15 @@ export const LoginForm = () => {
     const onSubmit = async (data: ILoginData) => {
         try {
             await login(data);
+            navigate("/");
         } catch (error) {
-            console.log("login error", error);
+            setErr(error);
         }
     };
 
     return (
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+            {err && <h1>{err}</h1>}
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label
