@@ -6,4 +6,5 @@ export interface IUser {
     roleID?: number;
     balance?: number;
     password: string;
+    profilePic: string;
 }

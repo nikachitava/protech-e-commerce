@@ -5,8 +5,12 @@ import bag from "/images/icons/bag.svg";
 import { Button } from "../Button/Button";
 
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+import { UserAvatar } from "../UserAvatar/UserAvatar";
 
 export const NavBar = () => {
+    const { currentUser } = useContext(AuthContext);
     return (
         <div className="flex justify-between items-center">
             <div>
@@ -14,12 +18,15 @@ export const NavBar = () => {
             </div>
             <div className="flex items-center gap-6">
                 <img src={moon} alt={moon} />
-                <img src={bell} alt={bell} />
-                <img src={bag} alt={bag} />
-                <Link to={"/login"}>
-                    <Button text="LOG IN" />
-                </Link>
-                {/* <UserAvatar avatar={useravatar} /> */}
+                {currentUser && <img src={bell} alt={bell} />}
+                {currentUser && <img src={bag} alt={bag} />}
+                {currentUser ? (
+                    <UserAvatar avatar={currentUser.profilePic} />
+                ) : (
+                    <Link to={"/login"}>
+                        <Button text="LOG IN" />
+                    </Link>
+                )}
             </div>
         </div>
     );
