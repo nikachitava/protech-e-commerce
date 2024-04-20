@@ -16,12 +16,17 @@ export const ProductCard: React.FC<IProductCardProps> = ({
             <img src={image} alt={image} className="w-[316px] h-[200px]" />
             <div className="px-3 py-3">
                 <div>
-                    <p>{productName}</p>
-                    <h1 className="text-[#212B36] font-semibold leading-5 text-sm font-poppins">
+                    <p className="text-[#36577a] font-semibold leading-5 text-sm font-poppins mb-1">
+                        {productName}
+                    </p>
+                    <p className="text-[#212B36] font-semibold leading-5 text-sm font-poppins mb-1">
                         {prodDescription.substring(0, 50)}
-                    </h1>
-                    <p className="text-[#637381] font-medium leading-5 text-sm font-poppins">
-                        {author}
+                        <span className="text-[#637381] opacity-50 text-xs hover:underline hover:opacity-100 font-poppins">
+                            {"  "}....read more
+                        </span>
+                    </p>
+                    <p className="text-[#637381] font-bold leading-5 text-xs font-poppins">
+                        Seller: {author}
                     </p>
                 </div>
                 <div className="flex justify-between items-end">
