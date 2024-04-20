@@ -16,6 +16,7 @@ import { Root } from "./pages/Root.tsx";
 import { LoginForm } from "./components/LoginForm/LoginForm.tsx";
 import { SingupForm } from "./components/SingupForm/SingupForm.tsx";
 import { AuthContextProvider } from "./context/authContext.tsx";
+import { Settings } from "./pages/Settings.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
             <Route path="contact" element={<Contact />} />
             <Route path="login" element={<LoginForm />} />
             <Route path="singup" element={<SingupForm />} />
+            <Route path="settings" element={<Settings />} />
         </Route>
     )
 );

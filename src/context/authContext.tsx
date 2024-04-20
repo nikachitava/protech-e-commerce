@@ -6,11 +6,13 @@ import { ILoginData } from "../interfaces/ILoginData";
 interface AuthContextType {
     currentUser: IUser | null;
     login: (inputs: ILoginData) => Promise<void>;
+    logout: any;
 }
 
 export const AuthContext = createContext<AuthContextType>({
     currentUser: null,
     login: async () => {},
+    logout: async () => {},
 });
 
 interface AuthContextProviderProps {
@@ -37,12 +39,23 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     };
 
+    const logout = async () => {
+        try {
+            await axios.post("http://localhost:3000/auth/logout", null, {
+                withCredentials: true,
+            });
+            setCurrentUser(null);
+        } catch (error) {
+            console.log("logout error", error);
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, login }}>
+        <AuthContext.Provider value={{ currentUser, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

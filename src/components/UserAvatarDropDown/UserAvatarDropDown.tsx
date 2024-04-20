@@ -1,4 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 
 interface IUserAvatar {
     avatar: string;
@@ -28,6 +30,12 @@ export const UserAvatarDropDown: React.FC<IUserAvatar> = ({ avatar }) => {
         };
     }, []);
 
+    const { logout } = useContext(AuthContext);
+
+    const handleLogOut = async () => {
+        await logout();
+    };
+
     return (
         <div
             className="relative inline-block text-left cursor-pointer"
@@ -46,21 +54,17 @@ export const UserAvatarDropDown: React.FC<IUserAvatar> = ({ avatar }) => {
                     className="z-10 absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg dark:bg-gray-700 shadow-lg"
                 >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Settings
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
+                        <Link to={"/settings"}>
+                            <li>
+                                <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    Settings
+                                </p>
+                            </li>
+                        </Link>
+                        <li onClick={handleLogOut}>
+                            <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 Log Out
-                            </a>
+                            </p>
                         </li>
                     </ul>
                 </div>
