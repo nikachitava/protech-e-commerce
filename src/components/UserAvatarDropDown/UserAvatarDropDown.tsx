@@ -28,8 +28,6 @@ export const UserAvatarDropDown: React.FC<IUserAvatar> = ({ avatar }) => {
         };
     }, []);
 
-    /** */
-
     return (
         <div
             className="relative inline-block text-left cursor-pointer"
@@ -45,7 +43,7 @@ export const UserAvatarDropDown: React.FC<IUserAvatar> = ({ avatar }) => {
             {isOpen && (
                 <div
                     id="DropDown"
-                    className="z-10 absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                    className="z-10 absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg dark:bg-gray-700 shadow-lg"
                 >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                         <li>
