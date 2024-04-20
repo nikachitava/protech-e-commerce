@@ -7,7 +7,7 @@ import { Button } from "../Button/Button";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
-import { UserAvatar } from "../UserAvatar/UserAvatar";
+import { UserAvatarDropDown } from "../UserAvatarDropDown/UserAvatarDropDown";
 
 export const NavBar = () => {
     const { currentUser } = useContext(AuthContext);
@@ -21,7 +21,7 @@ export const NavBar = () => {
                 {currentUser && <img src={bell} alt={bell} />}
                 {currentUser && <img src={bag} alt={bag} />}
                 {currentUser ? (
-                    <UserAvatar avatar={currentUser.profilePic} />
+                    <UserAvatarDropDown avatar={currentUser.profilePic} />
                 ) : (
                     <Link to={"/login"}>
                         <Button text="LOG IN" />
