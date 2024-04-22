@@ -20,6 +20,7 @@ const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
 
 export const LoginForm = () => {
     const [err, setErr] = useState<any>();
+    const { errorMessage } = useContext(AuthContext);
 
     const {
         register,
@@ -133,6 +134,11 @@ export const LoginForm = () => {
                     Submit
                 </button>
             </div>
+            {errorMessage && (
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                    {errorMessage}
+                </p>
+            )}
         </form>
     );
 };

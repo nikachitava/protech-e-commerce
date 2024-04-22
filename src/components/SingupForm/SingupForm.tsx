@@ -38,7 +38,6 @@ export const SingupForm = () => {
                 window.location.reload();
             })
             .catch((error) => {
-                console.error(error);
                 if (error.response && error.response.data) {
                     setErrorMessage(error.response.data.message);
                 } else {

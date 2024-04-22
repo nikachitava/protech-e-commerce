@@ -8,12 +8,14 @@ interface AuthContextType {
     currentUser: IUser | null;
     login: (inputs: ILoginData) => Promise<void>;
     logout: any;
+    errorMessage: string | null;
 }
 
 export const AuthContext = createContext<AuthContextType>({
     currentUser: null,
     login: async () => {},
     logout: async () => {},
+    errorMessage: null,
 });
 
 interface AuthContextProviderProps {
@@ -24,22 +26,29 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [currentUser, setCurrentUser] = useState<IUser | null>(
         JSON.parse(localStorage.getItem("user") || "null")
     );
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const login = async (inputs: ILoginData) => {
         try {
-            const res = await axios.post(
-                "http://localhost:3000/auth/login",
-                inputs,
-                {
+            await axios
+                .post("http://localhost:3000/auth/login", inputs, {
                     withCredentials: true,
-                }
-            );
-            setCurrentUser(res.data);
-            navigate("/");
-        } catch (error) {
-            console.log("login error", error);
-        }
+                })
+                .then((response) => {
+                    setCurrentUser(response.data);
+                    navigate("/");
+                })
+                .catch((error) => {
+                    if (error.response && error.response.data) {
+                        setErrorMessage(error.response.data.message);
+                    } else {
+                        setErrorMessage(
+                            "An error occurred while processing your request."
+                        );
+                    }
+                });
+        } catch (error) {}
     };
 
     const logout = async () => {
@@ -59,7 +68,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider
+            value={{ currentUser, login, logout, errorMessage }}
+        >
             {children}
         </AuthContext.Provider>
     );
