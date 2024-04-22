@@ -13,6 +13,7 @@ import { AuthContextProvider } from "./context/authContext.tsx";
 import { Settings } from "./pages/Settings.tsx";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { SingleProduct } from "./pages/SingleProduct.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -28,6 +29,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                         <Route path="login" element={<LoginForm />} />
                         <Route path="singup" element={<SingupForm />} />
                         <Route path="settings" element={<Settings />} />
+                        <Route
+                            path="products/:productID"
+                            element={<SingleProduct />}
+                        />
                     </Route>
                 </Routes>
             </AuthContextProvider>

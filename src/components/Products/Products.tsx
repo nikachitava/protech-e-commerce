@@ -41,6 +41,7 @@ export const Products = () => {
                 {currentItems.map((product) => (
                     <div key={product.productID}>
                         <ProductCard
+                            productID={product.productID}
                             productName={product.productName}
                             image={
                                 product.image.substring(0, 20) !== pattern
