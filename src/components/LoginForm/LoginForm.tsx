@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -20,7 +20,6 @@ const messageErrorStyle = "mt-2 text-sm text-red-600 dark:text-red-500";
 
 export const LoginForm = () => {
     const [err, setErr] = useState<any>();
-    const navigate = useNavigate();
 
     const {
         register,
@@ -33,7 +32,6 @@ export const LoginForm = () => {
     const onSubmit = async (data: ILoginData) => {
         try {
             await login(data);
-            navigate("/");
         } catch (error) {
             setErr(error);
         }

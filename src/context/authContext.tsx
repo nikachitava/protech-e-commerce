@@ -2,6 +2,7 @@ import { useState, createContext, useEffect, ReactNode } from "react";
 import { IUser } from "../interfaces/IUser";
 import axios from "axios";
 import { ILoginData } from "../interfaces/ILoginData";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
     currentUser: IUser | null;
@@ -23,6 +24,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [currentUser, setCurrentUser] = useState<IUser | null>(
         JSON.parse(localStorage.getItem("user") || "null")
     );
+    const navigate = useNavigate();
 
     const login = async (inputs: ILoginData) => {
         try {
@@ -34,6 +36,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 }
             );
             setCurrentUser(res.data);
+            navigate("/");
         } catch (error) {
             console.log("login error", error);
         }
@@ -45,6 +48,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 withCredentials: true,
             });
             setCurrentUser(null);
+            navigate("/");
         } catch (error) {
             console.log("logout error", error);
         }
