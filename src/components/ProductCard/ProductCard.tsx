@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IProductCardProps } from "../../interfaces/IProductCardProps";
 import addcart from "/images/icons/addcart.svg";
+import sale from "/images/icons/sale.svg";
 
 export const ProductCard: React.FC<IProductCardProps> = ({
     productID,
@@ -15,7 +16,10 @@ export const ProductCard: React.FC<IProductCardProps> = ({
 }) => {
     return (
         <Link to={`/products/${productID}`}>
-            <div className="bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            <div className=" bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                {discount && (
+                    <img src={sale} className="absolute right-0 top-0 w-12" />
+                )}
                 <img src={image} alt={image} className="w-[316px] h-[200px]" />
                 <div className="px-3 py-3">
                     <div>
@@ -35,12 +39,18 @@ export const ProductCard: React.FC<IProductCardProps> = ({
                     <div className="flex justify-between items-end">
                         <div>
                             <div className="flex gap-2 items-center mt-3 mb-2">
-                                <span className="text-[#FFC831] font-semibold font-poppins">
-                                    ${price}
-                                </span>
+                                {discount ? (
+                                    <span className="text-[#ff5e31] font-semibold font-poppins line-through line opacity-70">
+                                        ${price}
+                                    </span>
+                                ) : (
+                                    <span className="text-[#FFC831] font-semibold font-poppins">
+                                        ${price}
+                                    </span>
+                                )}
                                 {discount && (
-                                    <span className="text-[#637381] font-semibold font-poppins line-through">
-                                        ${discount}
+                                    <span className="text-[#637381] font-semibold font-poppins">
+                                        ${price - (price * discount) / 100}
                                     </span>
                                 )}
                             </div>

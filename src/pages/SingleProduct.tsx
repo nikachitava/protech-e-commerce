@@ -19,10 +19,19 @@ export const SingleProduct: React.FC = () => {
                 `http://localhost:3000/products/${productID}`
             );
             setProduct(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error("Error fetching product:", error);
         }
+    };
+
+    const buyProd = () => {
+        console.log("buy prod");
+    };
+    const addFav = () => {
+        console.log("added to fav");
+    };
+    const addToCart = () => {
+        console.log("added to cart");
     };
 
     const discountPrice =
@@ -38,8 +47,14 @@ export const SingleProduct: React.FC = () => {
                             <h1>{product[0].productName}</h1>
                             <img src={product[0].image} alt="product image" />
                             <div className="flex justify-between items-stretch mt-5">
-                                <Button text="Add to favourites" />
-                                <Button text="Add to cart" />
+                                <Button
+                                    text="Add to favourites"
+                                    onclick={addFav}
+                                />
+                                <Button
+                                    text="Add to cart"
+                                    onclick={addToCart}
+                                />
                             </div>
                         </div>
                     </div>
@@ -90,7 +105,7 @@ export const SingleProduct: React.FC = () => {
                             )}
                         </div>
 
-                        <Button text="Buy Product" />
+                        <Button text="Buy Product" onclick={buyProd} />
                     </div>
                 </>
             ) : (
