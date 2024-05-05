@@ -9,8 +9,9 @@ export const Home = () => {
                 <Header subheader={"Home"} header={"Best Products"} />
             </div>
             <div className="mt-6">
-                <Category />
-                <Products />
+                <Category>
+                    <Products additionalProps="" />
+                </Category>
             </div>
         </>
     );

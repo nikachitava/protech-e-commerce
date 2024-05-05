@@ -5,16 +5,24 @@ import { IProductCardProps } from "../../interfaces/IProductCardProps";
 import image_not_found from "/images/image_not_found.png";
 import axios from "axios";
 
-export const Products = () => {
+interface IProductsProps {
+    additionalProps: string;
+}
+
+export const Products: React.FC<IProductsProps> = ({ additionalProps }) => {
     const [products, setProducts] = useState<IProductCardProps[]>([]);
 
     useEffect(() => {
         fetchProdcuts();
-    }, []);
+    }, [additionalProps]);
 
     const fetchProdcuts = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/products");
+            const response = await axios.get("http://localhost:3000/products", {
+                params: {
+                    category: additionalProps,
+                },
+            });
             setProducts(response.data);
         } catch (error) {
             console.log("fetching data error");
@@ -37,7 +45,8 @@ export const Products = () => {
 
     return (
         <>
-            <div className="flex items-center justify-between flex-wrap gap-7 mt-7 mb-10">
+            {/* <div className="flex items-center justify-start flex-wrap gap-7 mt-7 mb-10"> */}
+            <div className="grid grid-cols-3 gap-7 mt-7 mb-10">
                 {currentItems.map((product) => (
                     <div key={product.productID}>
                         <ProductCard
