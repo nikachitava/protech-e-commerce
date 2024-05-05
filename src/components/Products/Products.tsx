@@ -51,9 +51,7 @@ export const Products = () => {
                             prodDescription={product.prodDescription}
                             author={product.author}
                             price={product.price}
-                            discount={
-                                product.discount == 0 ? null : product.discount
-                            }
+                            discount={product.discount}
                             sales={product.sales}
                             rate={product.rate}
                         />
