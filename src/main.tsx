@@ -14,6 +14,7 @@ import { Settings } from "./pages/Settings.tsx";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SingleProduct } from "./pages/SingleProduct.tsx";
+import { NotFound } from "./pages/NotFound.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                             path="products/:productID"
                             element={<SingleProduct />}
                         />
+                        <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>
             </AuthContextProvider>
