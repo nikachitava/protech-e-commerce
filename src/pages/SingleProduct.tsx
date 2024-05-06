@@ -81,7 +81,9 @@ export const SingleProduct: React.FC = () => {
                             </div>
                         </div>
                         <div className="flex items-center  justify-between">
-                            <p>{product[0].prodDescription}</p>
+                            <p className="font-poppins">
+                                {product[0].prodDescription}
+                            </p>
                         </div>
                     </div>
                     <div className="bg-gray-200 p-5 flex flex-col justify-between">
