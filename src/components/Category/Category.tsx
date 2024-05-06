@@ -39,7 +39,10 @@ export const Category: React.FC<ICategoryProps> = ({ children }) => {
         <div>
             <ul className="overflow-x-auto flex items-center flex-wrap gap-4 cursor-grab">
                 <li onClick={() => handleCurrentCategory("")}>
-                    <CategoryItem categoryName="All" />
+                    <CategoryItem
+                        categoryName="All"
+                        isActive={currentCategory === ""}
+                    />
                 </li>
                 {categories.map((category) => (
                     <li
@@ -48,7 +51,10 @@ export const Category: React.FC<ICategoryProps> = ({ children }) => {
                             handleCurrentCategory(category.categoryName)
                         }
                     >
-                        <CategoryItem categoryName={category.categoryName} />
+                        <CategoryItem
+                            categoryName={category.categoryName}
+                            isActive={currentCategory === category.categoryName}
+                        />
                     </li>
                 ))}
             </ul>
