@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { IProductCardProps } from "../../interfaces/IProductCardProps";
 import addcart from "/images/icons/addcart.svg";
 import sale from "/images/icons/sale.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 export const ProductCard: React.FC<IProductCardProps> = ({
     productID,
@@ -14,7 +16,9 @@ export const ProductCard: React.FC<IProductCardProps> = ({
     sales,
     rate,
 }) => {
+    const { currentUser } = useContext(AuthContext);
     const isDiscount = discount == 0 ? false : true;
+
     return (
         <Link to={`/products/${productID}`}>
             <div className=" bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
@@ -74,9 +78,11 @@ export const ProductCard: React.FC<IProductCardProps> = ({
                                 </div>
                             </div>
                         </div>
-                        <div className="p-3 bg-[#ced0d2] rounded-full cursor-pointer">
-                            <img src={addcart} alt={addcart} />
-                        </div>
+                        {currentUser && (
+                            <div className="p-3 bg-[#ced0d2] rounded-full cursor-pointer">
+                                <img src={addcart} alt={addcart} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

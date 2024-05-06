@@ -1,8 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { IProductCardProps } from "../interfaces/IProductCardProps";
 import { Button } from "../components/Button/Button";
+import { PopUpModal } from "../components/UI/PopUpModal/PopUpModal";
+import { AuthContext } from "../context/authContext";
 
 export const SingleProduct: React.FC = () => {
     const { productID } = useParams();
@@ -38,7 +40,12 @@ export const SingleProduct: React.FC = () => {
         product &&
         product[0].price - (product[0].price * product[0].discount) / 100;
 
-    return (
+    const { currentUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const goToLogin = () => navigate("/login");
+
+    return currentUser ? (
         <div className="mt-5 grid grid-cols-3 gap-5 bg-gray-100">
             {product ? (
                 <>
@@ -112,17 +119,11 @@ export const SingleProduct: React.FC = () => {
                 <h1>Error Fetching Product</h1>
             )}
         </div>
+    ) : (
+        <PopUpModal
+            modalText={"To see product details you have to log in"}
+            buttonText={"Log in"}
+            onClick={goToLogin}
+        />
     );
 };
-
-// <div>
-//     <h2>Product Details</h2>
-//     {product ? (
-//         <div>
-//             <p>Product ID: {product[0].productID}</p>
-//             <p>Name: {product[0].productName}</p>
-//         </div>
-//     ) : (
-//         <p>Loading product...</p>
-//     )}
-// </div>
