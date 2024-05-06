@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { IProductCardProps } from "../../interfaces/IProductCardProps";
-
-import image_not_found from "/images/image_not_found.png";
 import axios from "axios";
 
 interface IProductsProps {
@@ -41,22 +39,15 @@ export const Products: React.FC<IProductsProps> = ({ additionalProps }) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
-    const pattern = "https://example.com/";
-
     return (
         <>
-            {/* <div className="flex items-center justify-start flex-wrap gap-7 mt-7 mb-10"> */}
             <div className="grid grid-cols-3 gap-7 mt-7 mb-10">
                 {currentItems.map((product) => (
                     <div key={product.productID}>
                         <ProductCard
                             productID={product.productID}
                             productName={product.productName}
-                            image={
-                                product.image.substring(0, 20) !== pattern
-                                    ? product.image
-                                    : image_not_found
-                            }
+                            image={product.image}
                             prodDescription={product.prodDescription}
                             author={product.author}
                             price={product.price}
