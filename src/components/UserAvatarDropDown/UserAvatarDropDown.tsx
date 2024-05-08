@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import { Avatar } from "flowbite-react";
 
 interface IUserAvatar {
     avatar: string;
@@ -41,11 +42,13 @@ export const UserAvatarDropDown: React.FC<IUserAvatar> = ({ avatar }) => {
             className="relative inline-block text-left cursor-pointer"
             ref={dropdownRef}
         >
-            <div
-                onClick={toggleDropdown}
-                className="border-dashed w-[40px] h-auto p-1 border-2 rounded-full border-[#FFC831] overflow-hidden"
-            >
-                <img src={avatar} className="relative" alt="useravatar" />
+            <div onClick={toggleDropdown}>
+                <Avatar
+                    img={avatar}
+                    alt="user avatar"
+                    rounded
+                    className="relative"
+                />
             </div>
             {/* Dropdown menu */}
             {isOpen && (
