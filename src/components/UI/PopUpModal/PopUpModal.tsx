@@ -14,7 +14,6 @@ export const PopUpModal: React.FC<IPopUpModalProps> = ({
 }) => {
     return (
         <>
-            <Button onClick={onClick}>Toggle modal</Button>
             <Modal show={true} size="md" onClose={onClick} popup>
                 <Modal.Header />
                 <Modal.Body>

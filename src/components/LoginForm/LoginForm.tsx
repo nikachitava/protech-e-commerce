@@ -122,14 +122,14 @@ export const LoginForm = () => {
                 </div>
             </div>
             <Link to={"/singup"}>
-                <p className="font-poppins text-xs text-gray-900 my-3">
+                <p className="font-poppins text-xs text-gray-900 my-3 dark:text-white">
                     I don't have an account
                 </p>
             </Link>
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <button
                     type="submit"
-                    className="text-white bg-[#FFC831] hover:bg-[#ffd152] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white bg-[#FFC831] hover:bg-[#ffd152] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:focus:ring-yellow-800"
                 >
                     Submit
                 </button>

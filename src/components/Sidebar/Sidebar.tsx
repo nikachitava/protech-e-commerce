@@ -23,8 +23,8 @@ export const SideBar: React.FC<ISideBarProps> = ({ children }) => {
         setExpanded((curr) => !curr);
     };
     return (
-        <aside className={`h-screen`}>
-            <nav className="h-full flex flex-col bg-[#F9FAFB] border-r shadow-sm">
+        <aside className="h-screen">
+            <nav className="h-full flex flex-col bg-[#F9FAFB] border-r shadow-sm dark:bg-[#111827] dark:border-r-[#383838]">
                 <div className="flex justify-between items-center px-8 py-6">
                     <Link to={"/"}>
                         <img
