@@ -8,16 +8,19 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { UserAvatarDropDown } from "../UserAvatarDropDown/UserAvatarDropDown";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 export const NavBar = () => {
     const { currentUser } = useContext(AuthContext);
+    const { toggleDarkMode } = useContext(DarkModeContext);
+
     return (
         <div className="flex justify-between items-center">
             <div>
                 <SearchBar />
             </div>
             <div className="flex items-center gap-6">
-                <img src={moon} alt={moon} />
+                <img src={moon} alt={moon} onClick={toggleDarkMode} />
                 {currentUser && <img src={bell} alt={bell} />}
                 {currentUser && <img src={bag} alt={bag} />}
                 {currentUser ? (

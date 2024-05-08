@@ -9,6 +9,7 @@ export default withMT({
     "./node_modules/flowbite/**/*.js",
     flowbite.content(),
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {

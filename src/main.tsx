@@ -15,29 +15,32 @@ import { Settings } from "./pages/Settings.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SingleProduct } from "./pages/SingleProduct.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
+import { DarkThemeContextProvider } from "./context/darkModeContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <Router>
-            <AuthContextProvider>
-                <Routes>
-                    <Route path="/" element={<Root />}>
-                        <Route index element={<Home />} />
-                        <Route path="discover" element={<Discover />} />
-                        <Route path="popular" element={<Popular />} />
-                        <Route path="feed" element={<Feed />} />
-                        <Route path="contact" element={<Contact />} />
-                        <Route path="login" element={<LoginForm />} />
-                        <Route path="singup" element={<SingupForm />} />
-                        <Route path="settings" element={<Settings />} />
-                        <Route
-                            path="products/:productID"
-                            element={<SingleProduct />}
-                        />
-                        <Route path="*" element={<NotFound />} />
-                    </Route>
-                </Routes>
-            </AuthContextProvider>
+            <DarkThemeContextProvider>
+                <AuthContextProvider>
+                    <Routes>
+                        <Route path="/" element={<Root />}>
+                            <Route index element={<Home />} />
+                            <Route path="discover" element={<Discover />} />
+                            <Route path="popular" element={<Popular />} />
+                            <Route path="feed" element={<Feed />} />
+                            <Route path="contact" element={<Contact />} />
+                            <Route path="login" element={<LoginForm />} />
+                            <Route path="singup" element={<SingupForm />} />
+                            <Route path="settings" element={<Settings />} />
+                            <Route
+                                path="products/:productID"
+                                element={<SingleProduct />}
+                            />
+                            <Route path="*" element={<NotFound />} />
+                        </Route>
+                    </Routes>
+                </AuthContextProvider>
+            </DarkThemeContextProvider>
         </Router>
     </React.StrictMode>
 );
