@@ -21,23 +21,27 @@ export const ProductCard: React.FC<IProductCardProps> = ({
 
     return (
         <Link to={`/products/${productID}`}>
-            <div className=" bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            <div className=" bg-[#f2f2f2] w-[316px] cursor-pointer hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 dark:bg-dark-500 rounded-sm">
                 {isDiscount && (
                     <img src={sale} className="absolute right-0 top-0 w-12" />
                 )}
-                <img src={image} alt={image} className="w-[316px] h-[200px]" />
+                <img
+                    src={image}
+                    alt={image}
+                    className="w-[316px] h-[200px] rounded-md"
+                />
                 <div className="px-3 py-3">
                     <div>
-                        <p className="text-[#36577a] font-semibold leading-5 text-sm font-poppins mb-1">
+                        <p className="text-[#36577a] font-semibold leading-5 text-sm font-poppins mb-1 dark:text-white">
                             {productName}
                         </p>
-                        <p className="text-[#212B36] font-semibold leading-5 text-sm font-poppins mb-1">
+                        <p className="text-[#212B36] font-semibold leading-5 text-sm font-poppins mb-1 dark:text-white">
                             {prodDescription.substring(0, 50)}
-                            <span className="text-[#637381] opacity-50 text-xs hover:underline hover:opacity-100 font-poppins">
+                            <span className="text-[#637381] opacity-50 text-xs hover:underline hover:opacity-100 font-poppins dark:hover:text-[#cccccc]">
                                 {"  "}....read more
                             </span>
                         </p>
-                        <p className="text-[#637381] font-bold leading-5 text-xs font-poppins">
+                        <p className="text-[#637381] font-bold leading-5 text-xs font-poppins dark:text-deep-purple-100">
                             Seller: {author}
                         </p>
                     </div>
@@ -59,7 +63,7 @@ export const ProductCard: React.FC<IProductCardProps> = ({
                                     </span>
                                 )}
                             </div>
-                            <div className="flex items-center gap-4 text-[#637381] font-medium leading-5 text-sm font-poppins">
+                            <div className="flex items-center gap-4 text-[#637381] font-medium leading-5 text-sm font-poppins dark:text-white">
                                 {sales} sales
                                 <div className="flex items-center font-bold">
                                     <svg
