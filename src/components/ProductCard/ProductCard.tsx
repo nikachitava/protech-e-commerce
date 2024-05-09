@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { IProductCardProps } from "../../interfaces/IProductCardProps";
-import addcart from "/images/icons/addcart.svg";
 import sale from "/images/icons/sale.svg";
+import { FaCartPlus } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
@@ -83,8 +83,8 @@ export const ProductCard: React.FC<IProductCardProps> = ({
                             </div>
                         </div>
                         {currentUser && (
-                            <div className="p-3 bg-[#ced0d2] rounded-full cursor-pointer">
-                                <img src={addcart} alt={addcart} />
+                            <div className="p-3 bg-[#ced0d2] rounded-full cursor-pointer text-center">
+                                <FaCartPlus color="grey" />
                             </div>
                         )}
                     </div>
