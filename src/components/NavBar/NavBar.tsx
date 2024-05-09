@@ -1,9 +1,9 @@
 import { SearchBar } from "../SearchBar/SearchBar";
-import moon from "/images/icons/moon.svg";
-import bell from "/images/icons/bell.svg";
-import bag from "/images/icons/bag.svg";
+import { IoMoon } from "react-icons/io5";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { FaBell } from "react-icons/fa";
 import { Button } from "../Button/Button";
-
+import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -12,7 +12,7 @@ import { DarkModeContext } from "../../context/darkModeContext";
 
 export const NavBar = () => {
     const { currentUser } = useContext(AuthContext);
-    const { toggleDarkMode } = useContext(DarkModeContext);
+    const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
 
     return (
         <div className="flex justify-between items-center">
@@ -20,9 +20,35 @@ export const NavBar = () => {
                 <SearchBar />
             </div>
             <div className="flex items-center gap-6">
-                <img src={moon} alt={moon} onClick={toggleDarkMode} />
-                {currentUser && <img src={bell} alt={bell} />}
-                {currentUser && <img src={bag} alt={bag} />}
+                {isDarkMode ? (
+                    <MdOutlineWbSunny
+                        onClick={toggleDarkMode}
+                        className="cursor-pointer"
+                        color="white"
+                        size={24}
+                    />
+                ) : (
+                    <IoMoon
+                        onClick={toggleDarkMode}
+                        className="cursor-pointer"
+                        color="grey"
+                        size={24}
+                    />
+                )}
+                {currentUser && (
+                    <FaBell
+                        className="cursor-pointer"
+                        color={isDarkMode ? "white" : "grey"}
+                        size={24}
+                    />
+                )}
+                {currentUser && (
+                    <FaShoppingCart
+                        className="cursor-pointer"
+                        color={isDarkMode ? "white" : "grey"}
+                        size={24}
+                    />
+                )}
                 {currentUser ? (
                     <UserAvatarDropDown avatar={currentUser.profilePic} />
                 ) : (
