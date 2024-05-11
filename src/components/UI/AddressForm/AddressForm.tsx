@@ -1,37 +1,26 @@
-import { FloatingLabel, Button, FileInput, Label } from "flowbite-react";
+import { FloatingLabel, Button } from "flowbite-react";
 import { ToggleSwitch } from "flowbite-react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/authContext";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
 
-interface IFormInput {
-    username: string;
-    surname: string;
-    email: string;
-    image: string;
+interface IAddressForm {
+    address: string;
+    district: string;
+    phoneNumber: number;
+    addressTitle: string;
 }
 
-export const EditProfileLabels = () => {
+export const AddressForm = () => {
     const [enableEdit, setEnableEdit] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm<IFormInput>();
+    } = useForm<IAddressForm>();
 
-    const onSubmit = (data: IFormInput) => {
-        axios
-            .post("http://localhost:3000/users/update", {
-                ...data,
-                userID: currentUser?.userID,
-            })
-            .then(() => alert("Change saved succesfully"))
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+    const onSubmit = (data: IAddressForm) => {};
 
     return (
         <div className="grid grid-flow-row justify-stretch space-y-4 font-mono">
@@ -52,15 +41,14 @@ export const EditProfileLabels = () => {
                         render={({ field }) => (
                             <FloatingLabel
                                 variant="outlined"
-                                label="Name"
+                                label="Address"
                                 disabled={!enableEdit}
                                 {...field}
-                                color={errors.username && "error"}
+                                color={errors.address && "error"}
                             />
                         )}
-                        name="username"
+                        name="address"
                         control={control}
-                        defaultValue={currentUser?.username}
                         rules={{
                             required: "Username is requared.",
                             pattern: {
@@ -73,9 +61,9 @@ export const EditProfileLabels = () => {
                             },
                         }}
                     />
-                    {errors.username && (
+                    {errors.address && (
                         <p className="text-[10px] text-red-600">
-                            {errors.username.message}
+                            {errors.address.message}
                         </p>
                     )}
                 </div>
@@ -85,15 +73,14 @@ export const EditProfileLabels = () => {
                         render={({ field }) => (
                             <FloatingLabel
                                 variant="outlined"
-                                label="Surname"
+                                label="District"
                                 disabled={!enableEdit}
                                 {...field}
-                                color={errors.surname && "error"}
+                                color={errors.district && "error"}
                             />
                         )}
-                        name="surname"
+                        name="district"
                         control={control}
-                        defaultValue={currentUser?.surname}
                         rules={{
                             required: "Surname is requared.",
                             pattern: {
@@ -106,9 +93,9 @@ export const EditProfileLabels = () => {
                             },
                         }}
                     />
-                    {errors.surname && (
+                    {errors.district && (
                         <p className="text-[10px] text-red-600">
-                            {errors.surname.message}
+                            {errors.district.message}
                         </p>
                     )}
                 </div>
@@ -117,15 +104,14 @@ export const EditProfileLabels = () => {
                         render={({ field }) => (
                             <FloatingLabel
                                 variant="outlined"
-                                label="Email"
+                                label="Phone Number"
                                 disabled={!enableEdit}
                                 {...field}
-                                color={errors.email && "error"}
+                                color={errors.phoneNumber && "error"}
                             />
                         )}
-                        name="email"
+                        name="phoneNumber"
                         control={control}
-                        defaultValue={currentUser?.email}
                         rules={{
                             required: "Email is required",
                             pattern: {
@@ -134,29 +120,38 @@ export const EditProfileLabels = () => {
                             },
                         }}
                     />
-                    {errors.email && (
+                    {errors.phoneNumber && (
                         <p className="text-[10px] text-red-600">
-                            {errors.email.message}
+                            {errors.phoneNumber.message}
                         </p>
                     )}
                 </div>
                 <div>
-                    <Label
-                        htmlFor="small-file-upload"
-                        value="Upload Your avatar image"
-                    />
                     <Controller
                         render={({ field }) => (
-                            <FileInput
-                                id="small-file-upload"
-                                sizing="sm"
+                            <FloatingLabel
+                                variant="outlined"
+                                label="Address Title"
                                 disabled={!enableEdit}
                                 {...field}
+                                color={errors.addressTitle && "error"}
                             />
                         )}
-                        name="image"
+                        name="addressTitle"
                         control={control}
+                        rules={{
+                            required: "Email is required",
+                            pattern: {
+                                value: /^\S+@\S+$/i,
+                                message: "Invalid email address",
+                            },
+                        }}
                     />
+                    {errors.addressTitle && (
+                        <p className="text-[10px] text-red-600">
+                            {errors.addressTitle.message}
+                        </p>
+                    )}
                 </div>
 
                 <div>
