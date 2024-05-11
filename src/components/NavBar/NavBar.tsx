@@ -4,7 +4,7 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
 import { Button } from "../Button/Button";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { UserAvatarDropDown } from "../UserAvatarDropDown/UserAvatarDropDown";
@@ -13,12 +13,11 @@ import { DarkModeContext } from "../../context/darkModeContext";
 export const NavBar = () => {
     const { currentUser } = useContext(AuthContext);
     const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+    const location = useLocation();
 
     return (
         <div className="flex justify-between items-center">
-            <div>
-                <SearchBar />
-            </div>
+            <div>{location.pathname === "/" && <SearchBar />}</div>
             <div className="flex items-center gap-6">
                 {isDarkMode ? (
                     <MdOutlineWbSunny
