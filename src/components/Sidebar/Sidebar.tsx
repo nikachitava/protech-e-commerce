@@ -2,7 +2,7 @@ import { ReactNode, createContext, useState } from "react";
 import logo from "/images/icons/logo.svg";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface ISideBarProps {
     children: ReactNode;
@@ -22,6 +22,9 @@ export const SideBar: React.FC<ISideBarProps> = ({ children }) => {
     const handleSideBar = () => {
         setExpanded((curr) => !curr);
     };
+    const location = useLocation();
+
+    if (location.pathname === "/admin") return null;
     return (
         <aside className="h-screen">
             <nav className="h-full flex flex-col bg-[#F9FAFB] border-r shadow-sm dark:bg-[#111827] dark:border-r-[#383838]">

@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SingleProduct } from "./pages/SingleProduct.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { DarkThemeContextProvider } from "./context/darkModeContext.tsx";
+import { Admin } from "./pages/Admin.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -32,6 +33,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                             <Route path="login" element={<LoginForm />} />
                             <Route path="singup" element={<SingupForm />} />
                             <Route path="settings" element={<Settings />} />
+                            <Route path="settings" element={<Settings />} />
+                            <Route path="admin" element={<Admin />} />
                             <Route
                                 path="products/:productID"
                                 element={<SingleProduct />}

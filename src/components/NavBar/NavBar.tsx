@@ -15,6 +15,8 @@ export const NavBar = () => {
     const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
     const location = useLocation();
 
+    if (location.pathname === "/admin") return null;
+
     return (
         <div className="flex justify-between items-center">
             <div>{location.pathname === "/" && <SearchBar />}</div>
