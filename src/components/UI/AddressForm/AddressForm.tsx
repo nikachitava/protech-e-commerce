@@ -1,8 +1,9 @@
 import { FloatingLabel, Button } from "flowbite-react";
 import { ToggleSwitch } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/authContext";
 import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
 
 interface IAddressForm {
     address: string;
@@ -12,6 +13,8 @@ interface IAddressForm {
 }
 
 export const AddressForm = () => {
+    const [userPersonalInfo, setUserPersonalInfo] =
+        useState<IAddressForm | null>(null);
     const [enableEdit, setEnableEdit] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const {
@@ -20,7 +23,32 @@ export const AddressForm = () => {
         formState: { errors },
     } = useForm<IAddressForm>();
 
-    const onSubmit = (data: IAddressForm) => {};
+    const onSubmit = (data: IAddressForm) => {
+        axios
+            .post("http://localhost:3000/users/updatepersonalinfo", {
+                ...data,
+                userID: currentUser?.userID,
+            })
+            .then(() => alert("Change saved succesfully"))
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    useEffect(() => {
+        if (currentUser && currentUser.userID) {
+            axios
+                .get(
+                    `http://localhost:3000/users/getpersonalinfo?userID=${currentUser.userID}`
+                )
+                .then((response) => {
+                    setUserPersonalInfo(response.data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching personal info:", error);
+                });
+        }
+    }, []);
 
     return (
         <div className="grid grid-flow-row justify-stretch space-y-4 font-mono">
@@ -49,15 +77,11 @@ export const AddressForm = () => {
                         )}
                         name="address"
                         control={control}
+                        defaultValue={userPersonalInfo?.address}
                         rules={{
-                            required: "Username is requared.",
-                            pattern: {
-                                value: /^[A-Za-z]+$/,
-                                message: "Only characters are allowed",
-                            },
                             maxLength: {
-                                value: 20,
-                                message: "Username cannot exceed 20 characters",
+                                value: 70,
+                                message: "Address cannot exceed 70 characters",
                             },
                         }}
                     />
@@ -81,15 +105,11 @@ export const AddressForm = () => {
                         )}
                         name="district"
                         control={control}
+                        defaultValue={userPersonalInfo?.district}
                         rules={{
-                            required: "Surname is requared.",
-                            pattern: {
-                                value: /^[A-Za-z]+$/,
-                                message: "Only characters are allowed",
-                            },
                             maxLength: {
-                                value: 20,
-                                message: "Surname cannot exceed 20 characters",
+                                value: 50,
+                                message: "District cannot exceed 50 characters",
                             },
                         }}
                     />
@@ -112,11 +132,12 @@ export const AddressForm = () => {
                         )}
                         name="phoneNumber"
                         control={control}
+                        defaultValue={userPersonalInfo?.phoneNumber}
                         rules={{
-                            required: "Email is required",
+                            required: "Phone number is required",
                             pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: "Invalid email address",
+                                value: /^[0-9]+$/,
+                                message: "Only numbers",
                             },
                         }}
                     />
@@ -137,15 +158,9 @@ export const AddressForm = () => {
                                 color={errors.addressTitle && "error"}
                             />
                         )}
+                        defaultValue={userPersonalInfo?.addressTitle}
                         name="addressTitle"
                         control={control}
-                        rules={{
-                            required: "Email is required",
-                            pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: "Invalid email address",
-                            },
-                        }}
                     />
                     {errors.addressTitle && (
                         <p className="text-[10px] text-red-600">
