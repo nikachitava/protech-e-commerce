@@ -2,6 +2,7 @@ import { Dropdown } from "flowbite-react";
 import { useState } from "react";
 import { TableForUsers } from "../components/UI/TableForUsers/TableForUsers";
 import { TableForProdutcs } from "../components/UI/TableForProducts/TableForProducts";
+import { DbDescription } from "../components/DbDescription/DbDescription";
 
 export const Admin = () => {
     const [currentAction, setCurrentAction] = useState("getUsers");
@@ -31,12 +32,21 @@ export const Admin = () => {
                     >
                         Write news
                     </Dropdown.Item>
+                    <Dropdown.Item
+                        onClick={() => {
+                            setCurrentAction("description");
+                        }}
+                    >
+                        Database Description
+                    </Dropdown.Item>
                 </Dropdown>
             </div>
 
             <div className="flex-1">
                 {currentAction === "getUsers" && <TableForUsers />}
                 {currentAction === "getProducts" && <TableForProdutcs />}
+                {/* currentAction === "getProducts" && <TableForProdutcs /> */}
+                {currentAction === "description" && <DbDescription />}
             </div>
         </div>
     );
